@@ -14,6 +14,7 @@
  limitations under the License.
 -->
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -34,7 +35,7 @@
         android:contentDescription="@string/viewing_circle"
         android:src="@drawable/circle" />
 
-    <FrameLayout
+    <android.support.constraint.ConstraintLayout
         android:id="@+id/control"
         android:layout_width="match_parent"
         android:layout_height="112dp"
@@ -48,22 +49,31 @@
             android:id="@+id/picture"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginBottom="5dp"
-            android:text="@string/picture" />
+            android:layout_marginEnd="29dp"
+            android:text="@string/picture"
+            app:layout_constraintBottom_toBottomOf="@+id/info"
+            app:layout_constraintEnd_toStartOf="@+id/info"
+            app:layout_constraintTop_toTopOf="@+id/info" />
 
         <ImageButton
             android:id="@+id/info"
             style="@android:style/Widget.Material.Light.Button.Borderless"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical|end"
-            android:layout_marginEnd="31dp"
-            android:layout_marginBottom="5dp"
+            android:layout_marginStart="177dp"
+            android:layout_marginTop="15dp"
             android:contentDescription="@string/description_info"
             android:padding="20dp"
-            android:src="@drawable/ic_action_info" />
+            android:src="@drawable/ic_action_info"
+            app:layout_constraintStart_toEndOf="@+id/sensor_button"
+            app:layout_constraintTop_toTopOf="@+id/sensor_button" />
 
-    </FrameLayout>
+        <Button
+            android:id="@+id/sensor_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/sensor" />
+
+    </android.support.constraint.ConstraintLayout>
 
 </RelativeLayout>
