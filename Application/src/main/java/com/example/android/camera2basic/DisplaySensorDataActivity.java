@@ -59,10 +59,10 @@ public class DisplaySensorDataActivity extends AppCompatActivity {
         String message = getDisplayData();
 
         if(proximitySensor == null) {
-            message = "Proximity sensor not available.\n";
+            message += "Proximity sensor not available.\n";
             Log.e(TAG, message);
         } else {
-            message = "Proximity sensor is available.\n" + proximitySensor.toString() + "\n";
+            message += "Proximity sensor is available.\n" + proximitySensor.toString() + "\n";
             Log.e(TAG, message);
         }
 
@@ -76,13 +76,13 @@ public class DisplaySensorDataActivity extends AppCompatActivity {
             public void onSensorChanged(SensorEvent sensorEvent) {
                 if(sensorEvent.values[0] < proximitySensor.getMaximumRange()) {
                     // Detected something nearby
-                    msg += String.format("Proximity event: %f \n", sensorEvent.values[0]);
-                    showData(msg);
+                    msg = getDisplayData() + String.format("Proximity event: %f \n", sensorEvent.values[0]);
                     getWindow().getDecorView().setBackgroundColor(Color.RED);
                 } else {
                     // Nothing is nearby
                     getWindow().getDecorView().setBackgroundColor(Color.GREEN);
                 }
+                showData(msg);
             }
 
             @Override
@@ -110,10 +110,10 @@ public class DisplaySensorDataActivity extends AppCompatActivity {
         String message = getDisplayData();
 
         if(gyroscopeSensor == null) {
-            message = "Gyroscope sensor not available.\n";
+            message += "Gyroscope sensor not available.\n";
             Log.e(TAG, message);
         } else {
-            message = "Gyroscope sensor is available.\n" + gyroscopeSensor.toString() + "\n";
+            message += "Gyroscope sensor is available.\n" + gyroscopeSensor.toString() + "\n";
             Log.e(TAG, message);
         }
 
