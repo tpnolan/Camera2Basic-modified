@@ -22,6 +22,7 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.graphics.ImageFormat;
@@ -905,10 +906,9 @@ public class Camera2BasicFragment extends Fragment
             case R.id.sensor_button: {
                 Activity activity = getActivity();
                 if (null != activity) {
-                    new AlertDialog.Builder(activity)
-                            .setMessage(R.string.sensor_message)
-                            .setPositiveButton(android.R.string.ok, null)
-                            .show();
+                    Intent myIntent = new Intent(activity, DisplaySensorDataActivity.class);
+                    myIntent.putExtra("stuff", "hani"); //Optional parameters
+                    activity.startActivity(myIntent);
                 }
                 break;
             }
