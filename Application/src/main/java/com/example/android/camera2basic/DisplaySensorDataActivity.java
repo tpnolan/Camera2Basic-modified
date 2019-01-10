@@ -19,6 +19,9 @@ public class DisplaySensorDataActivity extends AppCompatActivity {
     protected Sensor              proximitySensor = null;
     protected SensorEventListener proximitySensorListener = null;
 
+    protected Sensor              gyroscopeSensor = null;
+    protected SensorEventListener gyroscopeSensorListener = null;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,10 +44,12 @@ public class DisplaySensorDataActivity extends AppCompatActivity {
 
     private void registerSensors() {
         registerProximitySensor();
+        registerGyroscopeSensor();
     }
 
     private void unregisterSensors() {
         unregisterProximitySensor();
+        unregisterGyroscopeSensor();
     }
 
     private void registerProximitySensor() {
@@ -97,6 +102,95 @@ public class DisplaySensorDataActivity extends AppCompatActivity {
         SensorManager sensorManager = getSensorManager();
         Sensor proximitySensor = getProximitySensor(sensorManager);
         sensorManager.unregisterListener(this.proximitySensorListener);
+    }
+
+    private void registerGyroscopeSensor() {
+        SensorManager sensorManager = getSensorManager();
+        final Sensor gyroscopeSensor = getGyroscopeSensor(sensorManager);
+
+        final String message;
+
+        if(gyroscopeSensor == null) {
+            message = "Gyroscope sensor not available.\n";
+            Log.e(TAG, message);
+        } else {
+            message = "Gyroscope sensor is available.\n" + gyroscopeSensor.toString() + "\n";
+            Log.e(TAG, message);
+        }
+
+        showData(message);
+
+        // Create listener
+        this.gyroscopeSensorListener = new SensorEventListener() {
+            private String msg = message;
+
+            @Override
+            public void onAccuracyChanged(Sensor sensor, int i) {
+                msg += "Gyroscope sensor accuracy changed to:" + i + "\n";
+                showData(msg);
+            }
+
+            @Override
+            public void onSensorChanged(SensorEvent sensorEvent) {
+                handleGyroscopeEvent(sensorEvent);
+            }
+
+            private void handleGyroscopeEvent(SensorEvent sensorEvent) {
+                msg += "Gyroscope event generated:\n";
+                showData(msg);
+
+                // values[0] == X axis
+                if(sensorEvent.values[0] > 0.5f ) {
+                    // Detected anti-clockwise around X axis
+                    msg += "X-axis rotation: "+ sensorEvent.values[0] + "\n";
+                    getWindow().getDecorView().setBackgroundColor(Color.GRAY);
+                } else if(sensorEvent.values[0] < -0.5f ) {
+                    // Detected clockwise around X axis
+                    msg += "X-axis rotation: "+ sensorEvent.values[0] + "\n";
+                    getWindow().getDecorView().setBackgroundColor(Color.MAGENTA);
+                }
+
+                // values[1] == Y axis
+                if(sensorEvent.values[1] > 0.5f ) {
+                    // Detected anti-clockwise around Y axis
+                    msg += "Y-axis rotation: "+ sensorEvent.values[1] + "\n";
+                    getWindow().getDecorView().setBackgroundColor(Color.DKGRAY);
+                } else if(sensorEvent.values[1] < -0.5f ) {
+                    // Detected clockwise around Y axis
+                    msg += "Y-axis rotation: "+ sensorEvent.values[1] + "\n";
+                    getWindow().getDecorView().setBackgroundColor(Color.CYAN);
+                }
+
+                // values[2] == Z axis
+                if(sensorEvent.values[2] > 0.5f ) {
+                    // Detected anti-clockwise around Z axis
+                    msg += "Z-axis rotation: "+ sensorEvent.values[2] + "\n";
+                    getWindow().getDecorView().setBackgroundColor(Color.BLUE);
+                } else if(sensorEvent.values[2] < -0.5f ) {
+                    // Detected clockwise around Z axis
+                    msg += "Z-axis rotation: "+ sensorEvent.values[2] + "\n";
+                    getWindow().getDecorView().setBackgroundColor(Color.YELLOW);
+                }
+            }
+        };
+
+        // Register it, specifying the normal delay
+        sensorManager.registerListener(this.gyroscopeSensorListener,
+                gyroscopeSensor, SensorManager.SENSOR_DELAY_NORMAL);
+    }
+
+    private void unregisterGyroscopeSensor() {
+        SensorManager sensorManager = getSensorManager();
+        Sensor gyroscopeSensor = getGyroscopeSensor(sensorManager);
+        sensorManager.unregisterListener(this.gyroscopeSensorListener);
+    }
+
+    private Sensor getGyroscopeSensor(SensorManager sensorManager) {
+        if( this.gyroscopeSensor == null ) {
+            return sensorManager.getDefaultSensor(Sensor.TYPE_GYROSCOPE);
+        } else {
+            return this.gyroscopeSensor;
+        }
     }
 
     private Sensor getProximitySensor(SensorManager sensorManager) {
