@@ -20,4 +20,5 @@
     <string name="camera_error">This device doesn\'t support Camera2 API.</string>
     <string name="viewing_circle">Viewing Circle</string>
     <string name="sensor">Sensor</string>
+    <string name="sensor_message">Sensor Data will be displayed soon.</string>
 </resources>

@@ -428,6 +428,7 @@ public class Camera2BasicFragment extends Fragment
     public void onViewCreated(final View view, Bundle savedInstanceState) {
         view.findViewById(R.id.picture).setOnClickListener(this);
         view.findViewById(R.id.info).setOnClickListener(this);
+        view.findViewById(R.id.sensor_button).setOnClickListener(this);
         mTextureView = (AutoFitTextureView) view.findViewById(R.id.texture);
     }
 
@@ -896,6 +897,16 @@ public class Camera2BasicFragment extends Fragment
                 if (null != activity) {
                     new AlertDialog.Builder(activity)
                             .setMessage(R.string.intro_message)
+                            .setPositiveButton(android.R.string.ok, null)
+                            .show();
+                }
+                break;
+            }
+            case R.id.sensor_button: {
+                Activity activity = getActivity();
+                if (null != activity) {
+                    new AlertDialog.Builder(activity)
+                            .setMessage(R.string.sensor_message)
                             .setPositiveButton(android.R.string.ok, null)
                             .show();
                 }
