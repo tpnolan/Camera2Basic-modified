@@ -26,7 +26,6 @@ public class DisplaySensorDataActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_display_sensor_data);
-
         setUpToolbar();
     }
 
@@ -100,7 +99,6 @@ public class DisplaySensorDataActivity extends AppCompatActivity {
 
     private void unregisterProximitySensor() {
         SensorManager sensorManager = getSensorManager();
-        Sensor proximitySensor = getProximitySensor(sensorManager);
         sensorManager.unregisterListener(this.proximitySensorListener);
     }
 
@@ -180,32 +178,28 @@ public class DisplaySensorDataActivity extends AppCompatActivity {
 
     private void unregisterGyroscopeSensor() {
         SensorManager sensorManager = getSensorManager();
-        Sensor gyroscopeSensor = getGyroscopeSensor(sensorManager);
         sensorManager.unregisterListener(this.gyroscopeSensorListener);
     }
 
     private Sensor getGyroscopeSensor(SensorManager sensorManager) {
         if( this.gyroscopeSensor == null ) {
-            return sensorManager.getDefaultSensor(Sensor.TYPE_GYROSCOPE);
-        } else {
-            return this.gyroscopeSensor;
+            this.gyroscopeSensor = sensorManager.getDefaultSensor(Sensor.TYPE_GYROSCOPE);
         }
+        return this.gyroscopeSensor;
     }
 
     private Sensor getProximitySensor(SensorManager sensorManager) {
         if( this.proximitySensor == null ) {
-            return sensorManager.getDefaultSensor(Sensor.TYPE_PROXIMITY);
-        } else {
-            return this.proximitySensor;
+            this.proximitySensor = sensorManager.getDefaultSensor(Sensor.TYPE_PROXIMITY);
         }
+        return this.proximitySensor;
     }
 
     private SensorManager getSensorManager() {
         if( this.sensorManager == null ) {
-            return (SensorManager) getSystemService(SENSOR_SERVICE);
-        } else {
-            return this.sensorManager;
+            this.sensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
         }
+        return this.sensorManager;
     }
 
     protected void showData(String message) {
