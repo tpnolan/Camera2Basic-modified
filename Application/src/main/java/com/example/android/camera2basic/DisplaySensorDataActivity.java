@@ -11,6 +11,8 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.widget.TextView;
 
+import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
+
 public class DisplaySensorDataActivity extends AppCompatActivity {
 
     private static final String TAG = "SensorDataActivity";
@@ -75,7 +77,8 @@ public class DisplaySensorDataActivity extends AppCompatActivity {
                 String msg = getDisplayData();
                 if(sensorEvent.values[0] < proximitySensor.getMaximumRange()) {
                     // Detected something nearby
-                    msg = getDisplayData() + String.format("Proximity event: %f \n", sensorEvent.values[0]);
+                    msg = getDisplayData() + "Proximity event: " +
+                            ReflectionToStringBuilder.toString(sensorEvent) + "\n";
                     getWindow().getDecorView().setBackgroundColor(Color.RED);
                 } else {
                     // Nothing is nearby
