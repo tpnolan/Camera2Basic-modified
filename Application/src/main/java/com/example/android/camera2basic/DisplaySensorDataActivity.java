@@ -70,10 +70,10 @@ public class DisplaySensorDataActivity extends AppCompatActivity {
 
         // Create listener
         this.proximitySensorListener = new SensorEventListener() {
-            private String msg = getDisplayData();
 
             @Override
             public void onSensorChanged(SensorEvent sensorEvent) {
+                String msg = getDisplayData();
                 if(sensorEvent.values[0] < proximitySensor.getMaximumRange()) {
                     // Detected something nearby
                     msg = getDisplayData() + String.format("Proximity event: %f \n", sensorEvent.values[0]);
@@ -87,6 +87,7 @@ public class DisplaySensorDataActivity extends AppCompatActivity {
 
             @Override
             public void onAccuracyChanged(Sensor sensor, int i) {
+                String msg = getDisplayData();
                 msg += "Proximity sensor accuracy changed to:" + i + "\n";
                 showData(msg);
             }
@@ -121,10 +122,10 @@ public class DisplaySensorDataActivity extends AppCompatActivity {
 
         // Create listener
         this.gyroscopeSensorListener = new SensorEventListener() {
-            private String msg = getDisplayData();
 
             @Override
             public void onAccuracyChanged(Sensor sensor, int i) {
+                String msg = getDisplayData();
                 msg += "Gyroscope sensor accuracy changed to:" + i + "\n";
                 showData(msg);
             }
@@ -135,6 +136,7 @@ public class DisplaySensorDataActivity extends AppCompatActivity {
             }
 
             private void handleGyroscopeEvent(SensorEvent sensorEvent) {
+                String msg = getDisplayData();
                 // values[0] == X axis
                 if(sensorEvent.values[0] > 0.5f ) {
                     // Detected anti-clockwise around X axis
