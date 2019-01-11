@@ -135,43 +135,6 @@ public class DisplaySensorDataActivity extends AppCompatActivity {
             public void onSensorChanged(SensorEvent sensorEvent) {
                 handleGyroscopeEvent(sensorEvent);
             }
-
-            private void handleGyroscopeEvent(SensorEvent sensorEvent) {
-                String msg = getDisplayData();
-                // values[0] == X axis
-                if(sensorEvent.values[0] > 0.5f ) {
-                    // Detected anti-clockwise around X axis
-                    msg += "Gyroscope X-axis rotation: "+ sensorEvent.values[0] + "\n";
-                    getWindow().getDecorView().setBackgroundColor(Color.GRAY);
-                } else if(sensorEvent.values[0] < -0.5f ) {
-                    // Detected clockwise around X axis
-                    msg += "Gyroscope X-axis rotation: "+ sensorEvent.values[0] + "\n";
-                    getWindow().getDecorView().setBackgroundColor(Color.MAGENTA);
-                }
-
-                // values[1] == Y axis
-                if(sensorEvent.values[1] > 0.5f ) {
-                    // Detected anti-clockwise around Y axis
-                    msg += "Gyroscope Y-axis rotation: "+ sensorEvent.values[1] + "\n";
-                    getWindow().getDecorView().setBackgroundColor(Color.DKGRAY);
-                } else if(sensorEvent.values[1] < -0.5f ) {
-                    // Detected clockwise around Y axis
-                    msg += "Gyroscope Y-axis rotation: "+ sensorEvent.values[1] + "\n";
-                    getWindow().getDecorView().setBackgroundColor(Color.CYAN);
-                }
-
-                // values[2] == Z axis
-                if(sensorEvent.values[2] > 0.5f ) {
-                    // Detected anti-clockwise around Z axis
-                    msg += "Gyroscope Z-axis rotation: "+ sensorEvent.values[2] + "\n";
-                    getWindow().getDecorView().setBackgroundColor(Color.BLUE);
-                } else if(sensorEvent.values[2] < -0.5f ) {
-                    // Detected clockwise around Z axis
-                    msg += "Gyroscope Z-axis rotation: "+ sensorEvent.values[2] + "\n";
-                    getWindow().getDecorView().setBackgroundColor(Color.YELLOW);
-                }
-                showData(msg);
-            }
         };
 
         // Register it, specifying the normal delay
@@ -221,5 +184,43 @@ public class DisplaySensorDataActivity extends AppCompatActivity {
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
+    }
+
+    protected void handleGyroscopeEvent(SensorEvent sensorEvent) {
+        String msg = getDisplayData();
+
+        // values[0] == X axis
+        if(sensorEvent.values[0] > 0.5f ) {
+            // Detected anti-clockwise around X axis
+            msg += "Gyroscope X-axis rotation: "+ sensorEvent.values[0] + "\n";
+            getWindow().getDecorView().setBackgroundColor(Color.GRAY);
+        } else if(sensorEvent.values[0] < -0.5f ) {
+            // Detected clockwise around X axis
+            msg += "Gyroscope X-axis rotation: "+ sensorEvent.values[0] + "\n";
+            getWindow().getDecorView().setBackgroundColor(Color.MAGENTA);
+        }
+
+        // values[1] == Y axis
+        if(sensorEvent.values[1] > 0.5f ) {
+            // Detected anti-clockwise around Y axis
+            msg += "Gyroscope Y-axis rotation: "+ sensorEvent.values[1] + "\n";
+            getWindow().getDecorView().setBackgroundColor(Color.DKGRAY);
+        } else if(sensorEvent.values[1] < -0.5f ) {
+            // Detected clockwise around Y axis
+            msg += "Gyroscope Y-axis rotation: "+ sensorEvent.values[1] + "\n";
+            getWindow().getDecorView().setBackgroundColor(Color.CYAN);
+        }
+
+        // values[2] == Z axis
+        if(sensorEvent.values[2] > 0.5f ) {
+            // Detected anti-clockwise around Z axis
+            msg += "Gyroscope Z-axis rotation: "+ sensorEvent.values[2] + "\n";
+            getWindow().getDecorView().setBackgroundColor(Color.BLUE);
+        } else if(sensorEvent.values[2] < -0.5f ) {
+            // Detected clockwise around Z axis
+            msg += "Gyroscope Z-axis rotation: "+ sensorEvent.values[2] + "\n";
+            getWindow().getDecorView().setBackgroundColor(Color.YELLOW);
+        }
+        showData(msg);
     }
 }
