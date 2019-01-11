@@ -8,6 +8,7 @@ import android.hardware.SensorManager;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
 import android.widget.TextView;
 
@@ -29,6 +30,8 @@ public class DisplaySensorDataActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_display_sensor_data);
         setUpToolbar();
+        TextView textView = findViewById(R.id.textView);
+        textView.setMovementMethod(new ScrollingMovementMethod());
     }
 
     @Override
