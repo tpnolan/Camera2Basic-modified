@@ -453,6 +453,9 @@ public class Camera2BasicFragment extends Fragment
         } else {
             mTextureView.setSurfaceTextureListener(mSurfaceTextureListener);
         }
+        Activity activity = getActivity();
+        GameRotationVectorSensor sensor = GameRotationVectorSensor.getInstance(activity);
+        sensor.registerSensor();
     }
 
     @Override
@@ -460,6 +463,9 @@ public class Camera2BasicFragment extends Fragment
         closeCamera();
         stopBackgroundThread();
         super.onPause();
+        Activity activity = getActivity();
+        GameRotationVectorSensor sensor = GameRotationVectorSensor.getInstance(activity);
+        sensor.unregisterSensor();
     }
 
     private void requestCameraPermission() {
@@ -886,11 +892,18 @@ public class Camera2BasicFragment extends Fragment
         }
     }
 
+    public void saveCurrentOrientation() {
+        Activity activity = getActivity();
+        GameRotationVectorSensor sensor = GameRotationVectorSensor.getInstance(activity);
+        sensor.saveOrientations();
+    }
+
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.picture: {
-                takePicture();
+                //takePicture();
+                saveCurrentOrientation();
                 break;
             }
             case R.id.info: {

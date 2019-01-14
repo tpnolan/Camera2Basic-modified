@@ -16,9 +16,17 @@ public final class GameRotationVectorSensor
     private static final String TAG = "GRVSensor";
     private static Activity parentActivity = null;
 
-    protected SensorManager       sensorManager   = null;
-    protected Sensor              sensor = null;
+    protected SensorManager       sensorManager  = null;
+    protected Sensor              sensor         = null;
     protected SensorEventListener sensorListener = null;
+
+    private static float live_x_rotation = 0.0f;
+    private static float live_y_rotation = 0.0f;
+    private static float live_z_rotation = 0.0f;
+
+    private static float saved_x_rotation = 0.0f;
+    private static float saved_y_rotation = 0.0f;
+    private static float saved_z_rotation = 0.0f;
 
     private GameRotationVectorSensor()
     {
@@ -66,7 +74,6 @@ public final class GameRotationVectorSensor
         // Create listener
         this.sensorListener = new SensorEventListener() {
 
-            @Override
             public void onAccuracyChanged(Sensor sensor, int i) {
             }
 
@@ -87,13 +94,23 @@ public final class GameRotationVectorSensor
         sensorManager.unregisterListener(this.sensorListener);
     }
 
+    public void saveOrientations() {
+        saved_x_rotation = live_x_rotation;
+        saved_y_rotation = live_y_rotation;
+        saved_z_rotation = live_z_rotation;
+
+        Log.e(TAG, "X-Axis rotation: " + saved_x_rotation + "\n");
+        Log.e(TAG, "Y-Axis rotation: " + saved_y_rotation  + "\n");
+        Log.e(TAG, "Z-Axis rotation: " + saved_z_rotation  + "\n");
+    }
+
     protected void handleSensorEvent(SensorEvent sensorEvent) {
 
         float[] orientations = getOrientationsArray(sensorEvent);
 
-        Log.e(TAG, "X-Axis rotation: " + orientations[0] + "\n");
-        Log.e(TAG, "Y-Axis rotation: " + orientations[1] + "\n");
-        Log.e(TAG, "Z-Axis rotation: " + orientations[2] + "\n");
+        live_x_rotation = orientations[0];
+        live_y_rotation = orientations[1];
+        live_z_rotation = orientations[2];
     }
 
     /**
