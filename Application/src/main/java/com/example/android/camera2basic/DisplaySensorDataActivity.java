@@ -17,6 +17,7 @@ import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
 public class DisplaySensorDataActivity extends AppCompatActivity {
 
     private static final boolean ENABLE_GYROSCOPE_ONLY_SENSOR = false;
+    private static final boolean ENABLE_ROTATION_VECTOR_SENSOR = false;
     private static final String TAG = "SensorDataActivity";
 
     protected SensorManager       sensorManager   = null;
@@ -28,6 +29,8 @@ public class DisplaySensorDataActivity extends AppCompatActivity {
 
     protected Sensor              rotationVectorSensor = null;
     protected SensorEventListener rotationVectorSensorListener = null;
+
+    protected GameRotationVectorSensor gameRotationVectorSensor = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,7 +58,11 @@ public class DisplaySensorDataActivity extends AppCompatActivity {
         if( ENABLE_GYROSCOPE_ONLY_SENSOR ) {
             registerGyroscopeSensor();
         }
-        registerRotationVectorSensor();
+        if( ENABLE_ROTATION_VECTOR_SENSOR ) {
+            registerRotationVectorSensor();
+        }
+        this.gameRotationVectorSensor = GameRotationVectorSensor.getInstance(this);
+        this.gameRotationVectorSensor.registerSensor();
     }
 
     private void unregisterSensors() {
@@ -63,7 +70,11 @@ public class DisplaySensorDataActivity extends AppCompatActivity {
         if( ENABLE_GYROSCOPE_ONLY_SENSOR ) {
             unregisterGyroscopeSensor();
         }
-        unregisterRotationVectorSensor();
+        if( ENABLE_ROTATION_VECTOR_SENSOR ) {
+            unregisterRotationVectorSensor();
+        }
+        this.gameRotationVectorSensor = GameRotationVectorSensor.getInstance(this);
+        this.gameRotationVectorSensor.unregisterSensor();
     }
 
     private void registerRotationVectorSensor() {
