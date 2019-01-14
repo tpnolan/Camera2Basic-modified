@@ -21,4 +21,5 @@
     <string name="viewing_circle">Viewing Circle</string>
     <string name="sensor">Logs</string>
     <string name="sensor_message">Sensor Data will be displayed soon.</string>
+    <string name="focus">Focus</string>
 </resources>
