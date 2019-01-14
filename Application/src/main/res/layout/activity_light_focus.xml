@@ -31,6 +31,7 @@
         android:layout_marginStart="32dp"
         android:layout_marginBottom="32dp"
         android:text="TextView"
+        android:textSize="18sp"
         app:layout_constraintBottom_toTopOf="@+id/divider"
         app:layout_constraintStart_toStartOf="parent" />
 
@@ -40,6 +41,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="32dp"
         android:text="TextView"
+        android:textSize="18sp"
         app:layout_constraintBottom_toTopOf="@+id/divider"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
@@ -51,26 +53,30 @@
         android:layout_marginEnd="32dp"
         android:layout_marginBottom="32dp"
         android:text="TextView"
+        android:textSize="18sp"
         app:layout_constraintBottom_toTopOf="@+id/divider"
         app:layout_constraintEnd_toEndOf="parent" />
 
     <EditText
         android:id="@+id/savedLabel"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="68dp"
+        android:layout_width="231dp"
+        android:layout_height="47dp"
+        android:layout_marginBottom="32dp"
+        android:clickable="false"
+        android:editable="false"
         android:ems="10"
-        android:inputType="textPersonName"
-        android:text="Saved Orientations"
-        app:layout_constraintTop_toTopOf="parent"
+        android:inputType="none"
+        android:selectAllOnFocus="false"
+        android:text="Saved Orientations (Below)"
+        app:layout_constraintBottom_toTopOf="@+id/azimuthLabel"
         tools:layout_editor_absoluteX="27dp" />
 
     <EditText
         android:id="@+id/azimuthLabel"
         android:layout_width="85dp"
         android:layout_height="47dp"
-        android:layout_marginStart="32dp"
-        android:layout_marginEnd="32dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginEnd="16dp"
         android:layout_marginBottom="16dp"
         android:ems="10"
         android:inputType="textPersonName"
@@ -83,7 +89,7 @@
         android:id="@+id/pitchLabel"
         android:layout_width="85dp"
         android:layout_height="46dp"
-        android:layout_marginStart="24dp"
+        android:layout_marginStart="16dp"
         android:layout_marginEnd="24dp"
         android:layout_marginBottom="16dp"
         android:ems="10"
@@ -97,7 +103,7 @@
         android:id="@+id/rollLabel"
         android:layout_width="66dp"
         android:layout_height="43dp"
-        android:layout_marginStart="32dp"
+        android:layout_marginStart="16dp"
         android:layout_marginEnd="24dp"
         android:layout_marginBottom="16dp"
         android:ems="10"
@@ -115,5 +121,50 @@
         android:elevation="4dp"
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
         app:popupTheme="@style/ThemeOverlay.AppCompat.Dark" />
+
+    <TextView
+        android:id="@+id/liveAzimuth"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="32dp"
+        android:text="TextView"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/divider" />
+
+    <TextView
+        android:id="@+id/livePitch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:text="TextView"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toStartOf="@+id/liveRoll"
+        app:layout_constraintStart_toEndOf="@+id/liveAzimuth"
+        app:layout_constraintTop_toBottomOf="@+id/divider" />
+
+    <TextView
+        android:id="@+id/liveRoll"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="32dp"
+        android:text="TextView"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/divider" />
+
+    <EditText
+        android:id="@+id/liveLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:editable="false"
+        android:ems="10"
+        android:inputType="none"
+        android:text="Live Orientations (Above)"
+        app:layout_constraintTop_toBottomOf="@+id/liveAzimuth"
+        tools:layout_editor_absoluteX="27dp" />
 
 </android.support.constraint.ConstraintLayout>

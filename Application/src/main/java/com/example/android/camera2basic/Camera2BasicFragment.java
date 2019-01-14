@@ -913,19 +913,20 @@ public class Camera2BasicFragment extends Fragment
                     myIntent.putExtra("stuff", "hani"); //Optional parameters
                     activity.startActivity(myIntent);
 
-//                    new AlertDialog.Builder(activity)
-//                            .setMessage(R.string.intro_message)
-//                            .setPositiveButton(android.R.string.ok, null)
-//                            .show();
                 }
                 break;
             }
             case R.id.sensor_button: {
                 Activity activity = getActivity();
                 if (null != activity) {
-                    Intent myIntent = new Intent(activity, DisplaySensorDataActivity.class);
-                    myIntent.putExtra("stuff", "hani"); //Optional parameters
-                    activity.startActivity(myIntent);
+//                    Intent myIntent = new Intent(activity, DisplaySensorDataActivity.class);
+//                    myIntent.putExtra("stuff", "hani"); //Optional parameters
+//                    activity.startActivity(myIntent);
+
+                    new AlertDialog.Builder(activity)
+                            .setMessage(R.string.intro_message)
+                            .setPositiveButton(android.R.string.ok, null)
+                            .show();
                 }
                 break;
             }
