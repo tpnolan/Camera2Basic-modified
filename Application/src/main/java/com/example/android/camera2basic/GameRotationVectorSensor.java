@@ -104,6 +104,14 @@ public final class GameRotationVectorSensor
         Log.e(TAG, "Z-Axis rotation: " + saved_z_rotation  + "\n");
     }
 
+    public float[] getSavedOrientations() {
+        return new float[] {saved_x_rotation, saved_y_rotation, saved_z_rotation};
+    }
+
+    public float[] getLiveOrientations() {
+        return new float[] {live_x_rotation, live_y_rotation, live_z_rotation};
+    }
+
     protected void handleSensorEvent(SensorEvent sensorEvent) {
 
         float[] orientations = getOrientationsArray(sensorEvent);

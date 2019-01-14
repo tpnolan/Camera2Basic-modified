@@ -50,7 +50,15 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".CameraActivity" />
         </activity>
-        <activity android:name=".LightFocusActivity"></activity>
+        <activity
+            android:name=".LightFocusActivity">
+            android:parentActivityName=".CameraActivity"
+            android:screenOrientation="portrait">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".CameraActivity" />
+
+        </activity>
     </application>
 
 </manifest>

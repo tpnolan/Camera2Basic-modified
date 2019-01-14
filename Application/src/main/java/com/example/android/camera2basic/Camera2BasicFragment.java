@@ -909,10 +909,14 @@ public class Camera2BasicFragment extends Fragment
             case R.id.info: {
                 Activity activity = getActivity();
                 if (null != activity) {
-                    new AlertDialog.Builder(activity)
-                            .setMessage(R.string.intro_message)
-                            .setPositiveButton(android.R.string.ok, null)
-                            .show();
+                    Intent myIntent = new Intent(activity, LightFocusActivity.class);
+                    myIntent.putExtra("stuff", "hani"); //Optional parameters
+                    activity.startActivity(myIntent);
+
+//                    new AlertDialog.Builder(activity)
+//                            .setMessage(R.string.intro_message)
+//                            .setPositiveButton(android.R.string.ok, null)
+//                            .show();
                 }
                 break;
             }
