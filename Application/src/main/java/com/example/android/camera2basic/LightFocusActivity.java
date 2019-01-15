@@ -40,9 +40,9 @@ public class LightFocusActivity extends AppCompatActivity {
     @Override
     public void onPause() {
         stopLiveOrientations();
-        super.onPause();
         GameRotationVectorSensor sensor = GameRotationVectorSensor.getInstance(this);
         sensor.unregisterSensor();
+        super.onPause();
     }
 
     private void startLiveOrientations() {
@@ -55,11 +55,12 @@ public class LightFocusActivity extends AppCompatActivity {
             }
         };
 
-        activityTimer.schedule(myTask, 0, 100);
+        this.activityTimer.schedule(myTask, 0, 100);
     }
 
     private void stopLiveOrientations() {
-        activityTimer.cancel();
+        this.activityTimer.cancel();
+        this.activityTimer = null;
     }
 
     private void displayLiveOrientations() {
@@ -71,8 +72,6 @@ public class LightFocusActivity extends AppCompatActivity {
 
             @Override
             public void run() {
-//                Log.e(TAG, "running on UI thread");
-
                 // Stuff that updates the UI
                 TextView liveAzimuthTextView = findViewById(R.id.liveAzimuth);
                 liveAzimuthTextView.setText( String.format("%.4f", orientations[0]) );

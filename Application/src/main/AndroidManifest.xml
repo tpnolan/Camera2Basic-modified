@@ -51,7 +51,7 @@
                 android:value=".CameraActivity" />
         </activity>
         <activity
-            android:name=".LightFocusActivity">
+            android:name=".LightFocusActivity"
             android:parentActivityName=".CameraActivity"
             android:screenOrientation="portrait">
             <meta-data

@@ -462,10 +462,10 @@ public class Camera2BasicFragment extends Fragment
     public void onPause() {
         closeCamera();
         stopBackgroundThread();
-        super.onPause();
         Activity activity = getActivity();
         GameRotationVectorSensor sensor = GameRotationVectorSensor.getInstance(activity);
         sensor.unregisterSensor();
+        super.onPause();
     }
 
     private void requestCameraPermission() {
@@ -919,9 +919,9 @@ public class Camera2BasicFragment extends Fragment
             case R.id.sensor_button: {
                 Activity activity = getActivity();
                 if (null != activity) {
-//                    Intent myIntent = new Intent(activity, DisplaySensorDataActivity.class);
-//                    myIntent.putExtra("stuff", "hani"); //Optional parameters
-//                    activity.startActivity(myIntent);
+                    //Intent myIntent = new Intent(activity, DisplaySensorDataActivity.class);
+                    //myIntent.putExtra("stuff", "hani"); //Optional parameters
+                    //activity.startActivity(myIntent);
 
                     new AlertDialog.Builder(activity)
                             .setMessage(R.string.intro_message)
