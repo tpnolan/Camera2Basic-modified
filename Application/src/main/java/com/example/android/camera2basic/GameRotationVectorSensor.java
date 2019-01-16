@@ -146,6 +146,13 @@ public final class GameRotationVectorSensor
      * @param sensorEvent the given SensorEvent
      * @return [X,Y,Z] orientations array in degrees as an array of floats.
      */
+    private final static double PI = Math.PI;
+    private final static double TWO_PI = PI*2;
+
+    private double mod(double a, double b){
+        return a % b;
+    }
+
     private float[] getOrientationsArray(SensorEvent sensorEvent) {
         float[] rotationMatrix = new float[16];
         SensorManager.getRotationMatrixFromVector( rotationMatrix, sensorEvent.values);
@@ -163,9 +170,16 @@ public final class GameRotationVectorSensor
 
 
         // Convert from Radians to Degrees
-        for(int i = 0; i < 3; i++) {
-            orientations[i] = (float)(Math.toDegrees(orientations[i]));
-        }
+//        for(int i = 0; i < 3; i++) {
+//            orientations[i] = (float)(Math.toDegrees(orientations[i]));
+//        }
+
+        orientations[1] = (float)(Math.toDegrees(orientations[1]));
+        orientations[2] = (float)(Math.toDegrees(orientations[2]));
+
+        orientations[0] = (float)(Math.toDegrees(mod(orientations[0] + TWO_PI, TWO_PI)));
+
         return orientations;
     }
+
 }
